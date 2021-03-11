@@ -9,7 +9,7 @@ import java.util.List;
 public class NotesServiceImpl implements NotesService {
     @Override
     public Note save(Note note) {
-        return null;
+        return new Note(1, "Saving note", "This is Dummy data.");
     }
 
     @Override
