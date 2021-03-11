@@ -12,20 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/notes")
 public class NotesController {
 
-    @Autowired private NotesService notesService;
+    @Autowired
+    private NotesService notesService;
 
     // Create
     @RequestMapping(method = RequestMethod.POST, value = "/")
     public Note createNote(Note note) {
-        // TODO: Implement this.
-        return null;
+        return notesService.save(note);
     }
 
     // Retrieve
     @RequestMapping(method = RequestMethod.POST, value = "/{noteId}")
     public Note getNote(@RequestParam("noteId") Integer noteId) {
-        // TODO: Implement this.
-        return null;
+        return notesService.findById(noteId);
     }
 
     // Update
@@ -34,6 +33,6 @@ public class NotesController {
     //Delete
     @RequestMapping(method = RequestMethod.DELETE, value = "/{noteId}")
     public void deleteNote(@RequestParam("noteId") Integer noteId) {
-        // TODO: Implement this.
+        notesService.deleteNote(noteId);
     }
 }
