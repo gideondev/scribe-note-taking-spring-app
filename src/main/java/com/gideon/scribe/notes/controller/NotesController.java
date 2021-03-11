@@ -1,12 +1,14 @@
 package com.gideon.scribe.notes.controller;
 
 import com.gideon.scribe.notes.model.Note;
+import com.gideon.scribe.notes.model.dto.NoteDto;
 import com.gideon.scribe.notes.service.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,16 +24,16 @@ public class NotesController {
 
     // Create
     @RequestMapping(method = RequestMethod.POST, value = "/")
-    public ResponseEntity<Note> createNote(Note note) {
-        Note savedNote = notesService.save(note);
-        return new ResponseEntity<Note>(savedNote, null, HttpStatus.OK);
+    public ResponseEntity<NoteDto> createNote(NoteDto noteDto) {
+        Note savedNote = notesService.save(noteDto.toEntity());
+        return new ResponseEntity<NoteDto>(NoteDto.fromEntity(savedNote), null, HttpStatus.OK);
     }
 
     // Retrieve
     @RequestMapping("/{noteId}")
-    public ResponseEntity<Note> getNote(@PathVariable("noteId") Integer noteId) {
+    public ResponseEntity<NoteDto> getNote(@PathVariable("noteId") Integer noteId) {
         Note note = notesService.findById(noteId);
-        return new ResponseEntity<Note>(note, null, HttpStatus.OK);
+        return new ResponseEntity<NoteDto>(NoteDto.fromEntity(note), null, HttpStatus.OK);
     }
 
     // Update
@@ -45,8 +47,14 @@ public class NotesController {
 
     // Others
     @RequestMapping("/")
-    public ResponseEntity<List<Note>> getAllNotes() {
+    public ResponseEntity<List<NoteDto>> getAllNotes() {
         List<Note> notes = notesService.findAll();
-        return new ResponseEntity<List<Note>>(notes, null, HttpStatus.OK);
+        List<NoteDto> noteDtos = new ArrayList<>();
+
+        for (Note note : notes) {
+            noteDtos.add(NoteDto.fromEntity(note));
+        }
+
+        return new ResponseEntity<List<NoteDto>>(noteDtos, null, HttpStatus.OK);
     }
 }
