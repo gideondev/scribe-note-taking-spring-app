@@ -5,6 +5,8 @@ import com.gideon.scribe.notes.service.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/notes")
 public class NotesController {
@@ -19,7 +21,7 @@ public class NotesController {
     }
 
     // Retrieve
-    @RequestMapping(method = RequestMethod.POST, value = "/{noteId}")
+    @RequestMapping("/{noteId}")
     public Note getNote(@PathVariable("noteId") Integer noteId) {
         return notesService.findById(noteId);
     }
@@ -31,5 +33,11 @@ public class NotesController {
     @RequestMapping(method = RequestMethod.DELETE, value = "/{noteId}")
     public void deleteNote(@PathVariable("noteId") Integer noteId) {
         notesService.deleteNote(noteId);
+    }
+
+    // Others
+    @RequestMapping("/")
+    public List<Note> getAllNotes() {
+        return notesService.findAll();
     }
 }
