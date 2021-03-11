@@ -3,6 +3,8 @@ package com.gideon.scribe.notes.controller;
 import com.gideon.scribe.notes.models.Note;
 import com.gideon.scribe.notes.service.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,14 +18,16 @@ public class NotesController {
 
     // Create
     @RequestMapping(method = RequestMethod.POST, value = "/")
-    public Note createNote(Note note) {
-        return notesService.save(note);
+    public ResponseEntity<Note> createNote(Note note) {
+        Note savedNote = notesService.save(note);
+        return new ResponseEntity<Note>(savedNote, null, HttpStatus.OK);
     }
 
     // Retrieve
     @RequestMapping("/{noteId}")
-    public Note getNote(@PathVariable("noteId") Integer noteId) {
-        return notesService.findById(noteId);
+    public ResponseEntity<Note> getNote(@PathVariable("noteId") Integer noteId) {
+        Note note = notesService.findById(noteId);
+        return new ResponseEntity<Note>(note, null, HttpStatus.OK);
     }
 
     // Update
@@ -37,7 +41,8 @@ public class NotesController {
 
     // Others
     @RequestMapping("/")
-    public List<Note> getAllNotes() {
-        return notesService.findAll();
+    public ResponseEntity<List<Note>> getAllNotes() {
+        List<Note> notes = notesService.findAll();
+        return new ResponseEntity<List<Note>>(notes, null, HttpStatus.OK);
     }
 }
