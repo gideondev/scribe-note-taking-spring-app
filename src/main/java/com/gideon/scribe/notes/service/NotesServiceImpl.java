@@ -12,8 +12,12 @@ import java.util.Optional;
 @Service
 public class NotesServiceImpl implements NotesService {
 
+    private final NotesRepository notesRepository;
+
     @Autowired
-    NotesRepository notesRepository;
+    public NotesServiceImpl(NotesRepository notesRepository) {
+        this.notesRepository = notesRepository;
+    }
 
     @Override
     public Note save(Note note) {

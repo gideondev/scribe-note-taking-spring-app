@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping("/notes")
 public class NotesController {
 
+    private final NotesService notesService;
+
     @Autowired
-    private NotesService notesService;
+    NotesController(NotesService notesService) {
+        this.notesService = notesService;
+    }
 
     // Create
     @RequestMapping(method = RequestMethod.POST, value = "/")
