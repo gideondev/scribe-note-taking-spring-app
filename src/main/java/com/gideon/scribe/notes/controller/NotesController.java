@@ -1,6 +1,6 @@
 package com.gideon.scribe.notes.controller;
 
-import com.gideon.scribe.notes.models.Note;
+import com.gideon.scribe.notes.model.Note;
 import com.gideon.scribe.notes.service.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.gideon.scribe.notes.service;
 
-import com.gideon.scribe.notes.models.Note;
+import com.gideon.scribe.notes.model.Note;
 import com.gideon.scribe.notes.repository.NotesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

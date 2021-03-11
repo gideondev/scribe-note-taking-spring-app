@@ -1,4 +1,4 @@
-package com.gideon.scribe.notes.models;
+package com.gideon.scribe.notes.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

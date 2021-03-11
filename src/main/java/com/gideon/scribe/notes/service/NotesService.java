@@ -1,6 +1,6 @@
 package com.gideon.scribe.notes.service;
 
-import com.gideon.scribe.notes.models.Note;
+import com.gideon.scribe.notes.model.Note;
 
 import java.util.List;
 
